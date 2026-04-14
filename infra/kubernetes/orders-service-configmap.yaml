@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orders-service-config
+  namespace: platform-demo
+data:
+  PLATFORM_SERVICE_NAME: orders-service
+  PLATFORM_ENVIRONMENT: local-kind

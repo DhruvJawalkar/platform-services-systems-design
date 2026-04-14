@@ -1,0 +1,8 @@
+Write-Host "Phase 1 bootstrap checklist:"
+Write-Host "1. Create a local Kubernetes cluster with kind or minikube."
+Write-Host "   Example: kind create cluster --config infra/local-cluster/kind-config.yaml"
+Write-Host "2. Build the orders-service jar with Maven using scripts/build-service.ps1."
+Write-Host "3. Build the Docker image tagged as orders-service:phase1 using scripts/build-image.ps1."
+Write-Host "4. Load the image into your local cluster if needed."
+Write-Host "   Example: kind load docker-image orders-service:phase1 --name platform-demo"
+Write-Host "5. Apply manifests from infra/kubernetes using scripts/deploy-services.ps1."

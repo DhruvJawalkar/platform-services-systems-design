@@ -1,0 +1,27 @@
+templateVersion: v1
+language: java
+framework: spring-boot
+javaVersion: 11
+requiredPackages:
+  - api
+  - config
+  - domain
+  - service
+requiredFiles:
+  - pom.xml
+  - Dockerfile
+  - src/main/resources/application.yml
+  - src/test/java
+runtimeDefaults:
+  probePaths:
+    readiness: /actuator/health/readiness
+    liveness: /actuator/health/liveness
+  configKeys:
+    - PLATFORM_SERVICE_NAME
+    - PLATFORM_ENVIRONMENT
+  resourceRequests:
+    cpu: 100m
+    memory: 256Mi
+  resourceLimits:
+    cpu: 500m
+    memory: 512Mi

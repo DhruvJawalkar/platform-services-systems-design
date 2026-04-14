@@ -9,9 +9,17 @@ Phase 1 focuses on:
 - Kubernetes deployment primitives
 - health probes and baseline configuration
 
+Phase 2 adds:
+
+- a platform-owned Java service template contract
+- a second Spring Boot service, `payments-service`
+- a multi-service build path for paved-road adoption
+
 ## Repository Layout
 
 - `services/orders-service` - initial product service
+- `services/payments-service` - second product service created from the template
+- `platform/java-service-template` - platform-owned golden-path contract
 - `infra/kubernetes` - Kubernetes manifests for local deployment
 - `docs` - architecture and implementation notes
 - `scripts` - convenience scripts for local setup and deployment
@@ -29,7 +37,6 @@ Phase 1 focuses on:
 ### Build the service
 
 ```powershell
-cd services/orders-service
 $env:MAVEN_OPTS='-Dmaven.repo.local=C:/Users/dhruv/OneDrive/Desktop/Labs/platform-services-systems-design/.m2/repository'
 mvn clean package
 ```
@@ -38,11 +45,13 @@ mvn clean package
 
 ```powershell
 docker build -t orders-service:phase1 services/orders-service
+docker build -t payments-service:phase2 services/payments-service
 ```
 
 If you are using `kind`, load the image into the cluster:
 
 ```powershell
+kind load docker-image payments-service:phase2 --name platform-demo
 kind load docker-image orders-service:phase1 --name platform-demo
 ```
 
@@ -52,6 +61,8 @@ kind load docker-image orders-service:phase1 --name platform-demo
 kubectl apply -f infra/kubernetes/namespace.yaml
 kubectl apply -f infra/kubernetes/orders-service-configmap.yaml
 kubectl apply -f infra/kubernetes/orders-service.yaml
+kubectl apply -f infra/kubernetes/payments-service-configmap.yaml
+kubectl apply -f infra/kubernetes/payments-service.yaml
 ```
 
 ### Port-forward the service
@@ -65,9 +76,17 @@ Then open:
 - `http://localhost:8080/api/v1/orders/health`
 - `http://localhost:8080/actuator/health`
 
+And port-forward the payments service in another terminal if needed:
+
+```powershell
+kubectl -n platform-demo port-forward svc/payments-service 8081:80
+```
+
+- `http://localhost:8081/api/v1/payments/health`
+
 ## Next Phases
 
 - add a reusable Java service template
 - add observability with OpenTelemetry, Prometheus, Grafana, Loki, and Tempo
 - add progressive delivery with Argo Rollouts
-- add a second service and cross-service request flow
+- add cross-service request flow between orders and payments

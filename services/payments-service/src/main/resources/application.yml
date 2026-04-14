@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: payments-service
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: 0.0.1-SNAPSHOT
+
+platform:
+  service:
+    name: ${PLATFORM_SERVICE_NAME:payments-service}
+    environment: ${PLATFORM_ENVIRONMENT:local}

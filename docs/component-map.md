@@ -4,6 +4,7 @@
 
 - `platform/java-service-template`
 - Kubernetes manifest conventions under `infra/kubernetes`
+- observability infrastructure under `infra/observability`
 - local cluster configuration under `infra/local-cluster`
 - shared build and deployment scripts under `scripts`
 
@@ -21,7 +22,9 @@
 - both services can be built from the root Maven aggregator
 - `orders-service` calls `payments-service` over HTTP
 - correlation IDs propagate through the request chain
+- the OpenTelemetry Collector scrapes service metrics and exposes them to Prometheus
+- Grafana visualizes service metrics through a provisioned Prometheus datasource
 
 ## Next integration point
 
-The next phase will add shared telemetry backends and dashboards on top of the current service-to-service flow.
+The next phase will add dedicated trace and log storage backends on top of the current metrics path.

@@ -13,6 +13,7 @@ Phases 1 and 2 establish the minimal backbone for the platform MVP.
 - HTTP service-to-service integration from orders to payments
 - correlation ID propagation for request tracking
 - Prometheus-compatible metrics endpoints
+- OpenTelemetry Collector, Prometheus, and Grafana for local observability
 
 ## Purpose
 
@@ -24,5 +25,6 @@ This phase proves the most basic golden path:
 4. deploy them to Kubernetes
 5. operate them with health-aware deployment primitives
 6. trace a request manually across service boundaries with shared correlation IDs
+7. inspect metrics through Prometheus and Grafana via a shared collector
 
 Future phases will layer in platform concerns like observability, rollout safety, and reusable templates.

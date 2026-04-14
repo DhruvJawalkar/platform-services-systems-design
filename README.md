@@ -21,12 +21,19 @@ The next implementation phase adds:
 - correlation ID propagation across service boundaries
 - Prometheus metrics registry support via actuator
 
+The current observability phase adds:
+
+- an OpenTelemetry Collector as the shared telemetry entrypoint
+- Prometheus scraping through the collector
+- a Grafana deployment with a pre-provisioned dashboard and datasource
+
 ## Repository Layout
 
 - `services/orders-service` - initial product service
 - `services/payments-service` - second product service created from the template
 - `platform/java-service-template` - platform-owned golden-path contract
 - `infra/kubernetes` - Kubernetes manifests for local deployment
+- `infra/observability` - Prometheus, Grafana, and OpenTelemetry Collector manifests
 - `docs` - architecture and implementation notes
 - `scripts` - convenience scripts for local setup and deployment
 
@@ -69,6 +76,13 @@ kubectl apply -f infra/kubernetes/orders-service-configmap.yaml
 kubectl apply -f infra/kubernetes/orders-service.yaml
 kubectl apply -f infra/kubernetes/payments-service-configmap.yaml
 kubectl apply -f infra/kubernetes/payments-service.yaml
+kubectl apply -f infra/observability/otel-collector-config.yaml
+kubectl apply -f infra/observability/otel-collector.yaml
+kubectl apply -f infra/observability/prometheus-config.yaml
+kubectl apply -f infra/observability/prometheus.yaml
+kubectl apply -f infra/observability/grafana-datasources.yaml
+kubectl apply -f infra/observability/grafana-dashboards.yaml
+kubectl apply -f infra/observability/grafana.yaml
 ```
 
 ### Port-forward the service
@@ -92,8 +106,20 @@ kubectl -n platform-demo port-forward svc/payments-service 8081:80
 - `http://localhost:8081/api/v1/payments/health`
 - `http://localhost:8081/actuator/prometheus`
 
+Port-forward the observability stack when needed:
+
+```powershell
+kubectl -n platform-demo port-forward svc/prometheus 9090:9090
+kubectl -n platform-demo port-forward svc/grafana 3000:3000
+```
+
+Then open:
+
+- `http://localhost:9090`
+- `http://localhost:3000` with `admin` / `admin`
+
 ## Next Phases
 
-- add observability with OpenTelemetry, Prometheus, Grafana, Loki, and Tempo
+- add tracing and logs backends such as Tempo and Loki behind the collector
 - add progressive delivery with Argo Rollouts
 - deepen cross-service request flow between orders and payments

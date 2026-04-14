@@ -15,6 +15,12 @@ Phase 2 adds:
 - a second Spring Boot service, `payments-service`
 - a multi-service build path for paved-road adoption
 
+The next implementation phase adds:
+
+- HTTP integration from `orders-service` to `payments-service`
+- correlation ID propagation across service boundaries
+- Prometheus metrics registry support via actuator
+
 ## Repository Layout
 
 - `services/orders-service` - initial product service
@@ -75,6 +81,7 @@ Then open:
 
 - `http://localhost:8080/api/v1/orders/health`
 - `http://localhost:8080/actuator/health`
+- `http://localhost:8080/actuator/prometheus`
 
 And port-forward the payments service in another terminal if needed:
 
@@ -83,10 +90,10 @@ kubectl -n platform-demo port-forward svc/payments-service 8081:80
 ```
 
 - `http://localhost:8081/api/v1/payments/health`
+- `http://localhost:8081/actuator/prometheus`
 
 ## Next Phases
 
-- add a reusable Java service template
 - add observability with OpenTelemetry, Prometheus, Grafana, Loki, and Tempo
 - add progressive delivery with Argo Rollouts
-- add cross-service request flow between orders and payments
+- deepen cross-service request flow between orders and payments

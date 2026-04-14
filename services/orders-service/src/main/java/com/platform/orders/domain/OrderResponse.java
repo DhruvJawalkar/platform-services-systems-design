@@ -8,19 +8,25 @@ public class OrderResponse {
     private final String status;
     private final String serviceName;
     private final String environment;
+    private final String paymentId;
+    private final String paymentStatus;
 
     public OrderResponse(String orderId,
                          String customerId,
                          int quantity,
                          String status,
                          String serviceName,
-                         String environment) {
+                         String environment,
+                         String paymentId,
+                         String paymentStatus) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.quantity = quantity;
         this.status = status;
         this.serviceName = serviceName;
         this.environment = environment;
+        this.paymentId = paymentId;
+        this.paymentStatus = paymentStatus;
     }
 
     public String getOrderId() {
@@ -45,5 +51,13 @@ public class OrderResponse {
 
     public String getEnvironment() {
         return environment;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 }

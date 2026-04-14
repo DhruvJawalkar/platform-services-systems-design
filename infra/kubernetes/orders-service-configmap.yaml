@@ -6,3 +6,4 @@ metadata:
 data:
   PLATFORM_SERVICE_NAME: orders-service
   PLATFORM_ENVIRONMENT: local-kind
+  PAYMENTS_SERVICE_BASE_URL: http://payments-service

@@ -23,7 +23,14 @@ info:
     name: ${spring.application.name}
     version: 0.0.1-SNAPSHOT
 
+logging:
+  pattern:
+    level: "%5p [%X{correlationId:-na}]"
+
 platform:
   service:
     name: ${PLATFORM_SERVICE_NAME:orders-service}
     environment: ${PLATFORM_ENVIRONMENT:local}
+  dependencies:
+    payments:
+      base-url: ${PAYMENTS_SERVICE_BASE_URL:http://localhost:8081}

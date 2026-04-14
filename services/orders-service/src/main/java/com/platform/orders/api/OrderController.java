@@ -30,6 +30,6 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrderResponse createOrder(@Valid @RequestBody CreateOrderRequest request) {
-        return orderService.sampleOrder(request.getCustomerId(), request.getQuantity());
+        return orderService.createOrder(request.getCustomerId(), request.getQuantity());
     }
 }

@@ -25,9 +25,11 @@ info:
 
 logging:
   pattern:
-    level: "%5p [%X{correlationId:-na}]"
+    level: "%5p [%X{correlationId:-na},%X{traceId:-na},%X{spanId:-na}]"
 
 platform:
   service:
     name: ${PLATFORM_SERVICE_NAME:payments-service}
     environment: ${PLATFORM_ENVIRONMENT:local}
+  telemetry:
+    otlp-endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4317}

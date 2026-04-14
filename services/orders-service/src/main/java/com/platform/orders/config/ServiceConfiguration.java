@@ -4,6 +4,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties({ServiceProperties.class, PaymentsClientProperties.class})
+@EnableConfigurationProperties({ServiceProperties.class, PaymentsClientProperties.class, TelemetryProperties.class})
 public class ServiceConfiguration {
 }

@@ -15,6 +15,7 @@ Phases 1 and 2 establish the minimal backbone for the platform MVP.
 - Prometheus-compatible metrics endpoints
 - OpenTelemetry Collector, Prometheus, and Grafana for local observability
 - Tempo for trace storage and Loki for log storage
+- OpenTelemetry SDK-based distributed tracing inside both services
 
 ## Purpose
 
@@ -28,5 +29,6 @@ This phase proves the most basic golden path:
 6. trace a request manually across service boundaries with shared correlation IDs
 7. inspect metrics through Prometheus and Grafana via a shared collector
 8. inspect pod logs in Loki and prepare a path for distributed traces in Tempo
+9. emit and inspect real end-to-end traces for the orders-to-payments request path
 
 Future phases will layer in platform concerns like observability, rollout safety, and reusable templates.

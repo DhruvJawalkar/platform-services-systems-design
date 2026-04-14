@@ -27,7 +27,9 @@
 - Tempo stores traces exported by the collector
 - Promtail ships Kubernetes pod logs into Loki
 - Grafana is provisioned with Prometheus, Loki, and Tempo datasources
+- both services emit OTLP traces to the collector
+- trace headers propagate from orders-service to payments-service
 
 ## Next integration point
 
-The next phase will instrument the services to emit real trace spans into the collector and Tempo.
+The next phase will focus on rollout safety and progressive delivery on top of the instrumented platform.

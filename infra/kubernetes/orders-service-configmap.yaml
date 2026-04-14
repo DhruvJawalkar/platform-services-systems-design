@@ -7,3 +7,4 @@ data:
   PLATFORM_SERVICE_NAME: orders-service
   PLATFORM_ENVIRONMENT: local-kind
   PAYMENTS_SERVICE_BASE_URL: http://payments-service
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317

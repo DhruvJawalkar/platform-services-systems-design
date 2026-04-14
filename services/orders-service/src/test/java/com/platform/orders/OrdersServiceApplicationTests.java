@@ -18,6 +18,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
@@ -43,6 +44,7 @@ class OrdersServiceApplicationTests {
         MockRestServiceServer server = MockRestServiceServer.bindTo(restTemplate).build();
         server.expect(requestTo("http://localhost:8081/api/v1/payments/authorize"))
                 .andExpect(method(HttpMethod.POST))
+                .andExpect(header("traceparent", org.hamcrest.Matchers.matchesPattern("00-.*")))
                 .andRespond(withSuccess(
                         "{\"paymentId\":\"payment-1\",\"accountId\":\"customer-123\",\"amountCents\":2000,\"status\":\"AUTHORIZED\",\"serviceName\":\"payments-service\",\"environment\":\"test\"}",
                         MediaType.APPLICATION_JSON

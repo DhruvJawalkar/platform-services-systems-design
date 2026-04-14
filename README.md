@@ -29,6 +29,13 @@ The current observability phase adds:
 - Tempo for trace storage
 - Loki plus Promtail for Kubernetes log aggregation
 
+The next tracing phase adds:
+
+- OpenTelemetry SDK wiring inside both services
+- request spans for inbound HTTP traffic
+- trace propagation from `orders-service` to `payments-service`
+- OTLP export from services into the collector and Tempo
+
 ## Repository Layout
 
 - `services/orders-service` - initial product service
@@ -125,6 +132,12 @@ In Grafana you can now explore:
 - metrics in Prometheus
 - pod logs in Loki
 - traces in Tempo once services begin exporting trace spans
+
+After deploying this phase, create an order request and inspect Tempo or Grafana Explore to see:
+
+- the inbound `orders-service` request span
+- the client span for the call into `payments-service`
+- the inbound `payments-service` request span
 
 ## Next Phases
 

@@ -6,3 +6,4 @@ metadata:
 data:
   PLATFORM_SERVICE_NAME: payments-service
   PLATFORM_ENVIRONMENT: local-kind
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317

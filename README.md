@@ -26,6 +26,8 @@ The current observability phase adds:
 - an OpenTelemetry Collector as the shared telemetry entrypoint
 - Prometheus scraping through the collector
 - a Grafana deployment with a pre-provisioned dashboard and datasource
+- Tempo for trace storage
+- Loki plus Promtail for Kubernetes log aggregation
 
 ## Repository Layout
 
@@ -118,8 +120,14 @@ Then open:
 - `http://localhost:9090`
 - `http://localhost:3000` with `admin` / `admin`
 
+In Grafana you can now explore:
+
+- metrics in Prometheus
+- pod logs in Loki
+- traces in Tempo once services begin exporting trace spans
+
 ## Next Phases
 
-- add tracing and logs backends such as Tempo and Loki behind the collector
 - add progressive delivery with Argo Rollouts
 - deepen cross-service request flow between orders and payments
+- instrument services to emit OpenTelemetry traces into the collector

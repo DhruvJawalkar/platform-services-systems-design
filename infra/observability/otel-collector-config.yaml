@@ -30,6 +30,10 @@ data:
         loglevel: info
       prometheus:
         endpoint: "0.0.0.0:8889"
+      otlp/tempo:
+        endpoint: tempo.platform-demo.svc.cluster.local:4317
+        tls:
+          insecure: true
 
     service:
       pipelines:
@@ -40,7 +44,7 @@ data:
         traces:
           receivers: [otlp]
           processors: [batch]
-          exporters: [logging]
+          exporters: [logging, otlp/tempo]
         logs:
           receivers: [otlp]
           processors: [batch]

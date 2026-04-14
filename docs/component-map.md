@@ -24,7 +24,10 @@
 - correlation IDs propagate through the request chain
 - the OpenTelemetry Collector scrapes service metrics and exposes them to Prometheus
 - Grafana visualizes service metrics through a provisioned Prometheus datasource
+- Tempo stores traces exported by the collector
+- Promtail ships Kubernetes pod logs into Loki
+- Grafana is provisioned with Prometheus, Loki, and Tempo datasources
 
 ## Next integration point
 
-The next phase will add dedicated trace and log storage backends on top of the current metrics path.
+The next phase will instrument the services to emit real trace spans into the collector and Tempo.

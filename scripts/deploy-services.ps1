@@ -5,6 +5,12 @@ kubectl apply -f infra/kubernetes/payments-service-configmap.yaml
 kubectl apply -f infra/kubernetes/payments-service.yaml
 kubectl apply -f infra/observability/otel-collector-config.yaml
 kubectl apply -f infra/observability/otel-collector.yaml
+kubectl apply -f infra/observability/tempo-config.yaml
+kubectl apply -f infra/observability/tempo.yaml
+kubectl apply -f infra/observability/loki-config.yaml
+kubectl apply -f infra/observability/loki.yaml
+kubectl apply -f infra/observability/promtail-config.yaml
+kubectl apply -f infra/observability/promtail.yaml
 kubectl apply -f infra/observability/prometheus-config.yaml
 kubectl apply -f infra/observability/prometheus.yaml
 kubectl apply -f infra/observability/grafana-datasources.yaml
